@@ -46,7 +46,6 @@ public class Registration extends Utils             //Utils class is already a c
         enterText(By.id("FirstName"), loadProps.getProperty("FirstName"));
         //enter lastname
         enterText(By.xpath("//input[@name='LastName']"), loadProps.getProperty("LastName"));
-
         //enter date of birth
         //date
         selectByVisibleNumber(By.xpath("//select[@name = 'DateOfBirthDay']"),(20));
@@ -62,10 +61,8 @@ public class Registration extends Utils             //Utils class is already a c
         enterText(By.id("ConfirmPassword"), loadProps.getProperty("Password"));
         //click on register to register the account
         clickOnElements(By.name("register-button"));
-
-        String ExpectedResult = "Your registration completed";
-        String ActualResult = getText(By.xpath("//div[@class='result']"));
-        Assert.assertEquals(ActualResult,ExpectedResult);
+        //assert method to check
+        assertMethod((By.xpath("//div[@class='result']")), "Your registration completed");
     }
     @Test
     public void emailAFriend()

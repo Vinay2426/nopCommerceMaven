@@ -3,9 +3,7 @@ package GroupNopCommerce;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 import org.testng.Assert;
 
 import java.io.File;
@@ -15,6 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import java.util.concurrent.TimeUnit;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class Utils extends BasePage             //BasePage is parent class
 {
@@ -55,41 +55,54 @@ public class Utils extends BasePage             //BasePage is parent class
     {
         return driver.findElement(by).isDisplayed();
     }
-    //(8) Wait for fixed time given in seconds(implicit wait)
-    public void fixedImplicitWaitTime(long time)
+    //(8) implicit wait
+    public void implicitWaitTime(long time)
     {
-        driver.manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(time, SECONDS);
     }
-    //(9) Try to click element multiple times if not available in first go
+    //(9)Explicit wait
+    public void explicitWaitTime(long time)
+    {
+        WebDriverWait wait = new WebDriverWait(driver,time);
+    }
+    //(10) fluent wait
+    public void fluentWait(long time, int frequency)
+    {
+        Wait wait = new FluentWait(driver)
+                .withTimeout(time, TimeUnit.SECONDS)
+                .pollingEvery(frequency, TimeUnit.SECONDS)
+                .ignoring(Exception.class);
+    }
+    //(11) Try to click element multiple times if not available in first go
     public void tryClickingMultipleTime(By by, int times)
     {
         driver.findElements(by).get(times).click();
     }
-    //(10) is dropdown present
+    //(12) is dropdown present
     public void dropDownPresent(By by, String text)
     {
         Select select = new Select(driver.findElement(by));
         select.getOptions();
     }
-    //(11) Wait for locator to be clickable for given time in seconds
+    //(13) Wait for locator to be clickable for given time in seconds
     public static void waitForClickable(By by,long time) {
         WebDriverWait wait = new WebDriverWait(driver, time);
         wait.until(ExpectedConditions.elementToBeClickable(by));
     }
-    //(12) Wait for element to be clickable for given time in seconds
+    //(14) Wait for element to be clickable for given time in seconds
     public static void waitForElementVisible(By by,long time)
     {
         WebDriverWait wait = new WebDriverWait(driver, time);
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(by));
     }
     //Wait for element for given time in second
-    //(13) wait till certain alert message/window appears which no locator
+    //(15) wait till certain alert message/window appears which no locator
     public static void waitForAlertPresent(By by,long time)
     {
         WebDriverWait wait = new WebDriverWait(driver, time);
         wait.until(ExpectedConditions.alertIsPresent());
     }
-    //(14) wait for element to be invisible
+    //(16) wait for element to be invisible
     public static void waitForAlertInvisible(By by,long time) {
         WebDriverWait wait = new WebDriverWait(driver, time);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
@@ -197,13 +210,11 @@ public class Utils extends BasePage             //BasePage is parent class
         SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyyMMddHHMM");
         return new SimpleDateFormat("dd-MMM-yyyy HH:MM");
     }
-
     //(31) This method determines if an element is enabled or not
     public boolean ifWebElementIsEnabledOrNot(By by)
     {
         return driver.findElement(by).isEnabled();
     }
-
     //(32) get location false or true
     public boolean getLocation(By by)
     {

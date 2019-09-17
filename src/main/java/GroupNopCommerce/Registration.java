@@ -28,7 +28,7 @@ public class Registration extends Utils             //Utils class is already a c
         //driver.manage().window().fullscreen();
         driver.manage().window().maximize();
         //set implicit wait fro driver object
-        fixedImplicitWaitTime(10);
+        implicitWaitTime(10);
         //open the website // "url" is called from testdataConfig.properties
         driver.get(loadProps.getProperty("url"));
     }
@@ -58,7 +58,7 @@ public class Registration extends Utils             //Utils class is already a c
         //enter the password
         enterText(By.id("Password"),loadProps.getProperty("Password"));
         //confirm password
-        enterText(By.id("ConfirmPassword"), loadProps.getProperty("Password"));
+        enterText(By.id("ConfirmPassword"), loadProps.getProperty("ConfirmPassword"));
         //click on register to register the account
         clickOnElements(By.name("register-button"));
         //assert method to check
@@ -92,74 +92,76 @@ public class Registration extends Utils             //Utils class is already a c
         enterText(By.name("PersonalMessage"),"This very good deal mate, don't need to miss it. go ahead and buy it");
         //click on send email
         clickOnElements(By.name("send-email"));
-        //message end of the process
-        String ExpectedResult = "Email a friend";
-        //message locator
-        String ActualResult = getText(By.xpath("//h1"));
-        //compare Actual result to expected result
-        Assert.assertEquals(ActualResult,ExpectedResult);
+        //message end of the process will be compare to actual result
+        assertMethod((By.xpath("//h1")), "Email a friend");
     }
     @Test
     public void selectCameraAndPhoto()
     {
         //click on register button
-        driver.findElement(By.xpath("//a[@class='ico-register']")).click();
-        //enter firstname
-        driver.findElement(By.id("FirstName")).sendKeys("Venus");
+        clickOnElements(By.xpath("//a[@class='ico-register']"));
+        //enter firstname, loadprops will obtain name from it.
+        enterText(By.id("FirstName"), loadProps.getProperty("FirstName"));
         //enter lastname
-        driver.findElement(By.xpath("//input[@name='LastName']")).sendKeys("Patel");
+        enterText(By.xpath("//input[@name='LastName']"), loadProps.getProperty("LastName"));
+        //enter date of birth
+        //date
+        selectByVisibleNumber(By.xpath("//select[@name = 'DateOfBirthDay']"),(20));
+        //month
+        selectByVisibleNumber(By.xpath("//select[@name = 'DateOfBirthMonth']"),(6));
+        //year
+        selectByVisibleText(By.xpath("//select[@name = 'DateOfBirthYear']"),("2000"));
         //enter email
-        driver.findElement(By.name("Email")).sendKeys("test"+randomDate()+"@test.com");
-        //Thread.sleep(2000); //it will wait for 2 seconds and will give result.
+        enterText(By.name("Email"),"test"+randomDate()+"@test.com");
         //enter the password
-        driver.findElement(By.id("Password")).sendKeys("test123");
+        enterText(By.id("Password"),loadProps.getProperty("Password"));
         //confirm password
-        driver.findElement(By.id("ConfirmPassword")).sendKeys("test123");
+        enterText(By.id("ConfirmPassword"), loadProps.getProperty("Password"));
         //click on register to register the account
-        driver.findElement(By.name("register-button")).click();
+        clickOnElements(By.name("register-button"));
         //click on continue and it will lead to the homepage
-        driver.findElement(By.xpath("//input[@name='register-continue']")).click();
+        clickOnElements(By.xpath("//input[@name='register-continue']"));
         //select on Electrics
-        driver.findElement(By.xpath("//h2[@class='title']//a[contains(text(),'Electronics')]")).click();
+        clickOnElements(By.xpath("//h2[@class='title']//a[contains(text(),'Electronics')]"));
         //click on Camera & photo
-        driver.findElement(By.xpath("//img[@alt='Picture for category Camera & photo']")).click();
-        //message end of the process
-        String ExpectedResult = "Camera & photo";
-        //locator for actual result
-        String ActualResult = driver.findElement(By.xpath("//h1[contains(text(),'Camera & photo')]")).getText();
-        //compare the actual with expected result
-        Assert.assertEquals(ActualResult,ExpectedResult);
+        clickOnElements(By.xpath("//img[@alt='Picture for category Camera & photo']"));
+        //message end of the process will compare the result with expected result
+        assertMethod(By.xpath("//h1[contains(text(),'Camera & photo')]"), "Camera & photo") ;
     }
     @Test
     public void userShouldBeFilterJewellery()
     {
         //click on register button
-        driver.findElement(By.xpath("//a[@class='ico-register']")).click();
-        //enter firstname
-        driver.findElement(By.id("FirstName")).sendKeys("Venus");
+        clickOnElements(By.xpath("//a[@class='ico-register']"));
+        //enter firstname, loadprops will obtain name from it.
+        enterText(By.id("FirstName"), loadProps.getProperty("FirstName"));
         //enter lastname
-        driver.findElement(By.xpath("//input[@name='LastName']")).sendKeys("Patel");
+        enterText(By.xpath("//input[@name='LastName']"), loadProps.getProperty("LastName"));
+        //enter date of birth
+        //date
+        selectByVisibleNumber(By.xpath("//select[@name = 'DateOfBirthDay']"),(20));
+        //month
+        selectByVisibleNumber(By.xpath("//select[@name = 'DateOfBirthMonth']"),(6));
+        //year
+        selectByVisibleText(By.xpath("//select[@name = 'DateOfBirthYear']"),("2000"));
         //enter email
-        driver.findElement(By.name("Email")).sendKeys("test"+randomDate()+"@test.com");
-        //Thread.sleep(2000); //it will wait for 2 seconds and will give result.
+        enterText(By.name("Email"),"test"+randomDate()+"@test.com");
         //enter the password
-        driver.findElement(By.id("Password")).sendKeys("test123");
+        enterText(By.id("Password"),loadProps.getProperty("Password"));
         //confirm password
-        driver.findElement(By.id("ConfirmPassword")).sendKeys("test123");
+        enterText(By.id("ConfirmPassword"), loadProps.getProperty("Password"));
         //click on register to register the account
-        driver.findElement(By.name("register-button")).click();
+        clickOnElements(By.name("register-button"));
         //click on continue and it will lead to the homepage
-        driver.findElement(By.xpath("//input[@name='register-continue']")).click();
+        clickOnElements(By.xpath("//input[@name='register-continue']"));
         //select jewllery option
-        driver.findElement(By.linkText("Jewelry")).click();
+        clickOnElements(By.linkText("Jewelry"));
         //click on Filter by price $700-$3000
-        driver.findElement(By.xpath("//a[contains(@href, '700-3000')]")).click();
+        clickOnElements(By.xpath("//a[contains(@href, '700-3000')]"));
 
         //comparing actual and expected result
-        String Expectedresult="$700.00 - $3,000.00";
-        String Actualresult= driver.findElement(By.xpath("//span[@class='item']")).getText();
-        Assert.assertEquals(Actualresult,Expectedresult);
-        String Productprice=driver.findElement(By.xpath("//span[@class='price actual-price']")).getText();
+        assertMethod((By.xpath("//span[@class='item']")),"$700.00 - $3,000.00");
+        String Productprice=getText(By.xpath("//span[@class='price actual-price']"));
 
         String price1=String.valueOf(Productprice.replace("$",""));
         String price2=String.valueOf(price1.replace(",",""));
@@ -171,38 +173,42 @@ public class Registration extends Utils             //Utils class is already a c
     public void AddBooksToShoppingBasket() throws InterruptedException
     {
         //click on register button
-        driver.findElement(By.xpath("//a[@class='ico-register']")).click();
-        //enter firstname
-        driver.findElement(By.id("FirstName")).sendKeys("Venus");
+        clickOnElements(By.xpath("//a[@class='ico-register']"));
+        //enter firstname, loadprops will obtain name from it.
+        enterText(By.id("FirstName"), loadProps.getProperty("FirstName"));
         //enter lastname
-        driver.findElement(By.xpath("//input[@name='LastName']")).sendKeys("Patel");
+        enterText(By.xpath("//input[@name='LastName']"), loadProps.getProperty("LastName"));
+        //enter date of birth
+        //date
+        selectByVisibleNumber(By.xpath("//select[@name = 'DateOfBirthDay']"),(20));
+        //month
+        selectByVisibleNumber(By.xpath("//select[@name = 'DateOfBirthMonth']"),(6));
+        //year
+        selectByVisibleText(By.xpath("//select[@name = 'DateOfBirthYear']"),("2000"));
         //enter email
-        driver.findElement(By.name("Email")).sendKeys("test"+randomDate()+"@test.com");
-        //Thread.sleep(2000); //it will wait for 2 seconds and will give result.
+        enterText(By.name("Email"),"test"+randomDate()+"@test.com");
         //enter the password
-        driver.findElement(By.id("Password")).sendKeys("test123");
+        enterText(By.id("Password"),loadProps.getProperty("Password"));
         //confirm password
-        driver.findElement(By.id("ConfirmPassword")).sendKeys("test123");
+        enterText(By.id("ConfirmPassword"), loadProps.getProperty("Password"));
         //click on register to register the account
-        driver.findElement(By.name("register-button")).click();
+        clickOnElements(By.name("register-button"));
         //click on continue and it will lead to the homepage
-        driver.findElement(By.xpath("//input[@name='register-continue']")).click();
+        clickOnElements(By.xpath("//input[@name='register-continue']"));
         //click(select) Books category
-        driver.findElement(By.xpath("//ul[@class='top-menu notmobile']//a[@href='/books']")).click();
+        clickOnElements(By.xpath("//ul[@class='top-menu notmobile']//a[@href='/books']"));
         //add first book to cart
-        driver.findElement(By.xpath("//div[@class='item-grid']//div[1]//div[1]//div[2]//div[3]//div[2]//input[1]")).click();
-        //pause for few seconds
-        Thread.sleep(2000);
-        //add second book to cart
-        driver.findElement(By.xpath("//div[@class='page-body']//div[2]//div[1]//div[2]//div[3]//div[2]//input[1]")).click();
-        Thread.sleep(5000);
+        clickOnElements(By.xpath("//div[@class='item-grid']//div[1]//div[1]//div[2]//div[3]//div[2]//input[1]"));
         //click on Shopping cart
-        driver.findElement(By.xpath("//span[@class='cart-label']")).click();
+        clickOnElements(By.xpath("//span[@class='cart-label']"));
+        //click on continue shopping
+        clickOnElements(By.xpath("//input[@class = 'button-2 continue-shopping-button']"));
+        //add second book to cart
+        clickOnElements(By.xpath("//div[@class='page-body']//div[2]//div[1]//div[2]//div[3]//div[2]//input[1]"));
+        //click on Shopping cart
+        clickOnElements(By.xpath("//span[@class='cart-label']"));
         //to check the result we will compare the two books cost with actual cost of the books
-        String ExpectedResult = "$78.00";
-        //locator for actual result
-        String ActualResult = driver.findElement(By.xpath("//span[@class='value-summary']//strong[contains(text(),'$78.00')]")).getText();
-        //compare the actual with expected result
-        Assert.assertEquals(ActualResult,ExpectedResult);
+        //assertMethod((By.xpath("//span[@class='value-summary']//strong[contains(text(),'$78.00')]")),"$78.00");
+        assertMethod(By.id("Fahrenheit 451 by Ray Bradbury" && ),
     }
 }

@@ -1,22 +1,15 @@
 package GroupNopCommerce;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
-
 public class Registration extends Utils             //Utils class is already a child class of BasePage class
 {
-    // protected static WebDriver driver;           //we have extends BasePage where we have already based the webDriver
-    LoadProps loadProps = new LoadProps();
+        LoadProps loadProps = new LoadProps();
 
     @BeforeMethod           //will enter the url
         public void openBrowser() throws InterruptedException
@@ -159,15 +152,15 @@ public class Registration extends Utils             //Utils class is already a c
         //click on Filter by price $700-$3000
         clickOnElements(By.xpath("//a[contains(@href, '700-3000')]"));
 
-        //comparing actual and expected result
-        assertMethod((By.xpath("//span[@class='item']")),"$700.00 - $3,000.00");
+        //here $ sign and space will be removed and string price will be converted to int
         String Productprice=getText(By.xpath("//span[@class='price actual-price']"));
-
         String price1=String.valueOf(Productprice.replace("$",""));
         String price2=String.valueOf(price1.replace(",",""));
         double price=Double.valueOf(price2);
-
         Assert.assertTrue(price>=700 && price<=3000);
+
+        //comparing actual and expected result
+        assertMethod((By.xpath("//span[@class='item']")),"$700.00 - $3,000.00");
     }
     @Test
     public void AddBooksToShoppingBasket() throws InterruptedException
@@ -209,6 +202,5 @@ public class Registration extends Utils             //Utils class is already a c
         clickOnElements(By.xpath("//span[@class='cart-label']"));
         //to check the result we will compare the two books cost with actual cost of the books
         //assertMethod((By.xpath("//span[@class='value-summary']//strong[contains(text(),'$78.00')]")),"$78.00");
-        assertMethod(By.id("Fahrenheit 451 by Ray Bradbury" && ),
     }
 }

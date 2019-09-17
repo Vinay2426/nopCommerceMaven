@@ -221,4 +221,5 @@ public class Utils extends BasePage             //BasePage is parent class
         Point location = driver.findElement(by).getLocation();
         return false;
     }
+
 }

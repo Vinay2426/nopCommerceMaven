@@ -139,16 +139,22 @@ public class Utils extends BasePage             //BasePage is parent class
         }
 
     //(22) Scroll to view element
-    public void scrollWebpageToViewElement(By by)
+    public void scrollWebPageToViewElement(By by)
     {
         Actions actions = new Actions(driver);
-        //driver.findElement(by).actions.moveToElement().actions.perform();
+        driver.findElement(by);
+        actions.moveToElement((WebElement) driver);
+        actions.perform();
     }
     //(23) Scroll to element and click
-    public void scrollWebpageToViewElementAndClick(By by)
+    public void scrollWebPageToViewElementAndClick(By by)
     {
-        Actions actions = new Actions(driver);
+        //Actions actions = new Actions(driver);
         //driver.findElement(by).actions.moveToElement().actions.perform().Click();
+        Actions actions = new Actions(driver);
+        driver.findElement(by);
+        actions.moveToElement((WebElement) driver);
+        actions.click();
     }
     //(24) Wait for alert to display
     public void waitForAlert(int time)

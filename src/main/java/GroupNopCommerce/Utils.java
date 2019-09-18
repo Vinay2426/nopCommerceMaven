@@ -12,6 +12,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -221,5 +222,15 @@ public class Utils extends BasePage             //BasePage is parent class
         Point location = driver.findElement(by).getLocation();
         return false;
     }
-
+    //(33) get the text from locator
+    public String getTextFromLocator(By by)
+    {
+        return driver.findElement(by).getText();
+    }
+    //(34) get the url
+    public void getUrl(String url)
+    {
+        LoadProps loadProps = new LoadProps();
+        driver.get(loadProps.getProperty(url));
+    }
 }

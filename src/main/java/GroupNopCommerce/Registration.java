@@ -12,7 +12,7 @@ public class Registration extends Utils             //Utils class is already a c
         LoadProps loadProps = new LoadProps();
 
     @BeforeMethod           //will enter the url
-        public void openBrowser() throws InterruptedException
+        public void openBrowser()
     {
         System.setProperty("webdriver.chrome.driver", "src\\main\\Resources\\BrowserDriver\\chromedriver.exe");
         //open the browser
@@ -23,7 +23,8 @@ public class Registration extends Utils             //Utils class is already a c
         //set implicit wait fro driver object
         implicitWaitTime(10);
         //open the website // "url" is called from testdataConfig.properties
-        driver.get(loadProps.getProperty("url"));
+        getUrl("url");
+
     }
     @AfterMethod                //will execute at the end of every method
     public void closeBrowser()
@@ -41,11 +42,11 @@ public class Registration extends Utils             //Utils class is already a c
         enterText(By.xpath("//input[@name='LastName']"), loadProps.getProperty("LastName"));
         //enter date of birth
         //date
-        selectByVisibleNumber(By.xpath("//select[@name = 'DateOfBirthDay']"),(20));
+        selectByVisibleText(By.xpath("//select[@name = 'DateOfBirthDay']"),(loadProps.getProperty("Date")));
         //month
-        selectByVisibleNumber(By.xpath("//select[@name = 'DateOfBirthMonth']"),(6));
+        selectByVisibleText(By.xpath("//select[@name = 'DateOfBirthMonth']"),(loadProps.getProperty("Month")));
         //year
-        selectByVisibleText(By.xpath("//select[@name = 'DateOfBirthYear']"),("2000"));
+        selectByVisibleText(By.xpath("//select[@name = 'DateOfBirthYear']"),(loadProps.getProperty("Year")));
         //enter email
         enterText(By.name("Email"),"test"+randomDate()+"@test.com");
         //enter the password
@@ -163,7 +164,7 @@ public class Registration extends Utils             //Utils class is already a c
         assertMethod((By.xpath("//span[@class='item']")),"$700.00 - $3,000.00");
     }
     @Test
-    public void AddBooksToShoppingBasket() throws InterruptedException
+    public void AddBooksToShoppingBasket()
     {
         //click on register button
         clickOnElements(By.xpath("//a[@class='ico-register']"));
@@ -201,6 +202,7 @@ public class Registration extends Utils             //Utils class is already a c
         //click on Shopping cart
         clickOnElements(By.xpath("//span[@class='cart-label']"));
         //to check the result we will compare the two books cost with actual cost of the books
+
         //assertMethod((By.xpath("//span[@class='value-summary']//strong[contains(text(),'$78.00')]")),"$78.00");
     }
 }

@@ -1,6 +1,7 @@
 package GroupNopCommerce;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -154,8 +155,8 @@ public class Registration extends Utils             //Utils class is already a c
         clickOnElements(By.xpath("//a[contains(@href, '700-3000')]"));
 
         //here $ sign and space will be removed and string price will be converted to int
-        String Productprice=getText(By.xpath("//span[@class='price actual-price']"));
-        String price1=String.valueOf(Productprice.replace("$",""));
+        String ProductPrice=getText(By.xpath("//span[@class='price actual-price']"));
+        String price1=String.valueOf(ProductPrice.replace("$",""));
         String price2=String.valueOf(price1.replace(",",""));
         double price=Double.valueOf(price2);
         Assert.assertTrue(price>=700 && price<=3000);
@@ -201,8 +202,12 @@ public class Registration extends Utils             //Utils class is already a c
         clickOnElements(By.xpath("//div[@class='page-body']//div[2]//div[1]//div[2]//div[3]//div[2]//input[1]"));
         //click on Shopping cart
         clickOnElements(By.xpath("//span[@class='cart-label']"));
-        //to check the result we will compare the two books cost with actual cost of the books
 
-        //assertMethod((By.xpath("//span[@class='value-summary']//strong[contains(text(),'$78.00')]")),"$78.00");
+        //will check here if the added item is inside that particular page // will check individually if the items are added to cart
+        WebElement firstItem = driver.findElement(By.xpath("//a[@class='product-name'] [contains(text(),'Fahrenheit 451 by Ray Bradbury')]"));
+        Assert.assertTrue(firstItem.isDisplayed());
+
+        WebElement secondItem = driver.findElement(By.xpath("//a[@class='product-name'] [contains(text(),'First Prize Pies')]"));
+        Assert.assertTrue(secondItem.isDisplayed());
     }
 }

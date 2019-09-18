@@ -108,77 +108,77 @@ public class Utils extends BasePage             //BasePage is parent class
         WebDriverWait wait = new WebDriverWait(driver, time);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
     }
-    // (15) select from visible text DROPDOWN
+    // (17) select from visible text DROPDOWN
     public void selectByVisibleText(By by, String text)
     {
         Select select = new Select (driver.findElement(by));
         select.selectByVisibleText(text);
     }
-    //(16) Select by Index number DROPDOWN
+    //(18) Select by Index number DROPDOWN
     public void selectByVisibleNumber(By by, int number)
     {
         Select select = new Select (driver.findElement(by));
         select.selectByIndex(number);
     }
-    //(17) Select from the value DROPDOWN
+    //(19) Select from the value DROPDOWN
     public void selectByValue(By by, String value)
     {
         Select select = new Select(driver.findElement(by));
         select.selectByValue(value);
     }
-    //(18) Select from first selected option
+    //(20) Select from first selected option
     public void selectByFirstSelectedOption(By by, String value)
     {
         Select select = new Select(driver.findElement(by));
         select.getFirstSelectedOption();
     }
-    //(19) Assert method to compare results
+    //(21) Assert method to compare results
         public void assertMethod(By actual, String expected)
         {
             Assert.assertEquals(getText(actual),expected);
         }
 
-    //(20) Scroll to view element
+    //(22) Scroll to view element
     public void scrollWebpageToViewElement(By by)
     {
         Actions actions = new Actions(driver);
         //driver.findElement(by).actions.moveToElement().actions.perform();
     }
-    //(21) Scroll to element and click
+    //(23) Scroll to element and click
     public void scrollWebpageToViewElementAndClick(By by)
     {
         Actions actions = new Actions(driver);
         //driver.findElement(by).actions.moveToElement().actions.perform().Click();
     }
-    //(22) Wait for alert to display
+    //(24) Wait for alert to display
     public void waitForAlert(int time)
     {
         WebDriverWait wait = new WebDriverWait(driver, time);
         wait.until(ExpectedConditions.alertIsPresent());
         driver.switchTo().alert().getText();
     }
-    //(23) Get attribute of element//get attribute
+    //(25) Get attribute of element//get attribute
     public String getAttribute(By by, String text)
     {
         return driver.findElement(by).getAttribute(text);
     }
-    //(24) get css property of element //get css value
+    //(26) get css property of element //get css value
     public void getCssValue(By by, String text)
     {
         driver.findElement(by).getCssValue(text);
     }
-    //(25) it will generate random numbers for email
+    //(27) it will generate random numbers for email
     public static String randomDate()
     {
         DateFormat format=new SimpleDateFormat("ddMMyyHHmmss");
         return format.format(new Date());
     }
-    //(26) take screenshot of current display(full)
+    //(28) take screenshot of current display(full)
 
 
 
 
-    //(27) take screenshot of browser
+    //(29) take screenshot of browser
     public static void takeScreenShot(WebDriver webdriver, String fileWithPath) throws IOException
     {
         //convert web driver object to take screen shot
@@ -193,41 +193,41 @@ public class Utils extends BasePage             //BasePage is parent class
         //copy file at destination
         FileUtils.copyFile(SrcFile, DestFile);
     }
-    //(28) date stamp short
+    //(30) date stamp short
     public String shortDateStamp()
     {
         SimpleDateFormat dateFormat1 = new SimpleDateFormat();
         return new SimpleDateFormat("dd.MM.yyyy").format(new Date());
     }
-    //(29) date stamp long
+    //(31) date stamp long
     public String longDateStamp()
     {
         SimpleDateFormat dateFormat1 = new SimpleDateFormat();
         return new SimpleDateFormat("dd.MM.yyyy.HH.mm.ss").format(new Date());
     }
-    //(30) convert date....
+    //(32) convert date....
     public SimpleDateFormat covertDate()
     {
         SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyyMMddHHMM");
         return new SimpleDateFormat("dd-MMM-yyyy HH:MM");
     }
-    //(31) This method determines if an element is enabled or not
+    //(33) This method determines if an element is enabled or not
     public boolean ifWebElementIsEnabledOrNot(By by)
     {
         return driver.findElement(by).isEnabled();
     }
-    //(32) get location false or true
+    //(34) get location false or true
     public boolean getLocation(By by)
     {
         Point location = driver.findElement(by).getLocation();
         return false;
     }
-    //(33) get the text from locator
+    //(35) get the text from locator
     public String getTextFromLocator(By by)
     {
         return driver.findElement(by).getText();
     }
-    //(34) get the url
+    //(36) get the url
     public void getUrl(String url)
     {
         LoadProps loadProps = new LoadProps();

@@ -14,7 +14,8 @@ public class LoadProps                  //loadprops will get the info from testd
     public String getProperty (String key)
     {
         props = new Properties();
-        try {
+        try
+        {
             inputStream = new FileInputStream("src\\main\\Resources\\testdataConfig.properties");
         }
         catch (FileNotFoundException e)

@@ -16,12 +16,17 @@ public class LoadProps                  //loadprops will get the info from testd
         props = new Properties();
         try {
             inputStream = new FileInputStream("src\\main\\Resources\\testdataConfig.properties");
-        } catch (FileNotFoundException e) {
+        }
+        catch (FileNotFoundException e)
+        {
             e.printStackTrace();
         }
-        try {
+        try
+        {
             props.load(inputStream);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
         return props.getProperty(key);

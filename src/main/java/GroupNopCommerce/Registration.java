@@ -8,6 +8,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Date;
+
 public class Registration extends Utils             //Utils class is already a child class of BasePage class
 {
         LoadProps loadProps = new LoadProps();
@@ -50,6 +52,8 @@ public class Registration extends Utils             //Utils class is already a c
         selectByVisibleText(By.xpath("//select[@name = 'DateOfBirthYear']"),(loadProps.getProperty("Year")));
         //enter email
         enterText(By.name("Email"),"test"+randomDate()+"@test.com");
+        //click on checkBox to optout from Newsletter
+        clickOnElements(By.xpath("//input[@type='checkbox']"));
         //enter the password
         enterText(By.id("Password"),loadProps.getProperty("Password"));
         //confirm password
@@ -68,6 +72,14 @@ public class Registration extends Utils             //Utils class is already a c
         enterText(By.id("FirstName"),"Venus");
         //enter lastname
         enterText(By.xpath("//input[@name='LastName']"),"Patel");
+        //enter date of birth
+        //date
+        selectByVisibleText(By.xpath("//select[@name = 'DateOfBirthDay']"),(loadProps.getProperty("Date")));
+        //month
+        selectByVisibleText(By.xpath("//select[@name = 'DateOfBirthMonth']"),(loadProps.getProperty("Month")));
+        //year
+        selectByVisibleText(By.xpath("//select[@name = 'DateOfBirthYear']"),(loadProps.getProperty("Year")));
+
         //enter email
         enterText(By.name("Email"), "test"+randomDate()+"@test.com");
         //enter the password
@@ -78,7 +90,8 @@ public class Registration extends Utils             //Utils class is already a c
         clickOnElements(By.name("register-button"));
         //click on continue and it will lead to the homepage
         clickOnElements(By.xpath("//input[@name='register-continue']"));
-        clickOnElements(By.xpath("//div[@class='product-grid home-page-product-grid']//div[@class='item-grid']//div[2]//div[1]//div[1]//a[1]//img[1]"));
+        //click on macbook pro
+        clickOnElements(By.xpath("//div/h2/a[@href=\"/apple-macbook-pro-13-inch\"]"));
         //click on email a friend
         clickOnElements(By.xpath("//input[@value='Email a friend']"));
         //fill friend's email address
@@ -101,11 +114,11 @@ public class Registration extends Utils             //Utils class is already a c
         enterText(By.xpath("//input[@name='LastName']"), loadProps.getProperty("LastName"));
         //enter date of birth
         //date
-        selectByVisibleNumber(By.xpath("//select[@name = 'DateOfBirthDay']"),(20));
+        selectByVisibleText(By.xpath("//select[@name = 'DateOfBirthDay']"),(loadProps.getProperty("Date")));
         //month
-        selectByVisibleNumber(By.xpath("//select[@name = 'DateOfBirthMonth']"),(6));
+        selectByVisibleText(By.xpath("//select[@name = 'DateOfBirthMonth']"),(loadProps.getProperty("Month")));
         //year
-        selectByVisibleText(By.xpath("//select[@name = 'DateOfBirthYear']"),("2000"));
+        selectByVisibleText(By.xpath("//select[@name = 'DateOfBirthYear']"),(loadProps.getProperty("Year")));
         //enter email
         enterText(By.name("Email"),"test"+randomDate()+"@test.com");
         //enter the password
@@ -134,11 +147,11 @@ public class Registration extends Utils             //Utils class is already a c
         enterText(By.xpath("//input[@name='LastName']"), loadProps.getProperty("LastName"));
         //enter date of birth
         //date
-        selectByVisibleNumber(By.xpath("//select[@name = 'DateOfBirthDay']"),(20));
+        selectByVisibleText(By.xpath("//select[@name = 'DateOfBirthDay']"),(loadProps.getProperty("Date")));
         //month
-        selectByVisibleNumber(By.xpath("//select[@name = 'DateOfBirthMonth']"),(6));
+        selectByVisibleText(By.xpath("//select[@name = 'DateOfBirthMonth']"),(loadProps.getProperty("Month")));
         //year
-        selectByVisibleText(By.xpath("//select[@name = 'DateOfBirthYear']"),("2000"));
+        selectByVisibleText(By.xpath("//select[@name = 'DateOfBirthYear']"),(loadProps.getProperty("Year")));
         //enter email
         enterText(By.name("Email"),"test"+randomDate()+"@test.com");
         //enter the password
@@ -154,15 +167,18 @@ public class Registration extends Utils             //Utils class is already a c
         //click on Filter by price $700-$3000
         clickOnElements(By.xpath("//a[contains(@href, '700-3000')]"));
 
-        //here $ sign and space will be removed and string price will be converted to int
-        String ProductPrice=getText(By.xpath("//span[@class='price actual-price']"));
+        //product price will be checked here if it is between selected filter price
+        //price path has been selected
+        String ProductPrice=getTextReturn(By.xpath("//span[@class='price actual-price']"));
+        // dollar sign will be removed
         String price1=String.valueOf(ProductPrice.replace("$",""));
+        //coma (,) will be removed
         String price2=String.valueOf(price1.replace(",",""));
-        double price=Double.valueOf(price2);
+        //price2 will be converted to double
+        double price= Double.valueOf(price2);
+        //price2 is declared in double and initialised as price
+        //now price will be checked with filter condition
         Assert.assertTrue(price>=700 && price<=3000);
-
-        //comparing actual and expected result
-        assertMethod((By.xpath("//span[@class='item']")),"$700.00 - $3,000.00");
     }
     @Test
     public void AddBooksToShoppingBasket()
@@ -175,11 +191,11 @@ public class Registration extends Utils             //Utils class is already a c
         enterText(By.xpath("//input[@name='LastName']"), loadProps.getProperty("LastName"));
         //enter date of birth
         //date
-        selectByVisibleNumber(By.xpath("//select[@name = 'DateOfBirthDay']"),(20));
+        selectByVisibleText(By.xpath("//select[@name = 'DateOfBirthDay']"),(loadProps.getProperty("Date")));
         //month
-        selectByVisibleNumber(By.xpath("//select[@name = 'DateOfBirthMonth']"),(6));
+        selectByVisibleText(By.xpath("//select[@name = 'DateOfBirthMonth']"),(loadProps.getProperty("Month")));
         //year
-        selectByVisibleText(By.xpath("//select[@name = 'DateOfBirthYear']"),("2000"));
+        selectByVisibleText(By.xpath("//select[@name = 'DateOfBirthYear']"),(loadProps.getProperty("Year")));
         //enter email
         enterText(By.name("Email"),"test"+randomDate()+"@test.com");
         //enter the password
@@ -193,13 +209,13 @@ public class Registration extends Utils             //Utils class is already a c
         //click(select) Books category
         clickOnElements(By.xpath("//ul[@class='top-menu notmobile']//a[@href='/books']"));
         //add first book to cart
-        clickOnElements(By.xpath("//div[@class='item-grid']//div[1]//div[1]//div[2]//div[3]//div[2]//input[1]"));
+        clickOnElements(By.xpath("//input[contains(@onclick, 'catalog/37/1')]"));
         //click on Shopping cart
         clickOnElements(By.xpath("//span[@class='cart-label']"));
         //click on continue shopping
         clickOnElements(By.xpath("//input[@class = 'button-2 continue-shopping-button']"));
         //add second book to cart
-        clickOnElements(By.xpath("//div[@class='page-body']//div[2]//div[1]//div[2]//div[3]//div[2]//input[1]"));
+        clickOnElements(By.xpath("//input[contains(@onclick, '38/1')]"));
         //click on Shopping cart
         clickOnElements(By.xpath("//span[@class='cart-label']"));
 

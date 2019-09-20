@@ -42,7 +42,7 @@ public class Utils extends BasePage             //BasePage is parent class
         driver.findElement(by).sendKeys(text);
     }
     //(5) to get the text for expected and actual result
-    public String getText(By by)
+    public String getTextReturn(By by)
     {
         return driver.findElement(by).getText();
     }
@@ -62,9 +62,14 @@ public class Utils extends BasePage             //BasePage is parent class
         driver.manage().timeouts().implicitlyWait(time, SECONDS);
     }
     //(9)Explicit wait
-    public void explicitWaitTime(long time)
+    public void explicitWaitTime(long time, By by)
     {
         WebDriverWait wait = new WebDriverWait(driver,time);
+        WebElement waitForClick;
+        //waitForClick = (WebElement) wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(by));
+       // waitForClick.click();
+        wait.until(ExpectedConditions.elementToBeClickable(by)).click();
+
     }
     //(10) fluent wait
     public void fluentWait(long time, int frequency)
@@ -73,6 +78,13 @@ public class Utils extends BasePage             //BasePage is parent class
                 .withTimeout(time, TimeUnit.SECONDS)
                 .pollingEvery(frequency, TimeUnit.SECONDS)
                 .ignoring(Exception.class);
+//        WebElement foo = wait.until(new Function<WebDriver, WebElement>);
+//        {
+//            public WebElement apply(WebDriver driver)
+//            {
+//                return driver.findElement(By.id("foo"));
+//            }
+//        }
     }
     //(11) Try to click element multiple times if not available in first go
     public void tryClickingMultipleTime(By by, int times)
@@ -133,9 +145,9 @@ public class Utils extends BasePage             //BasePage is parent class
         select.getFirstSelectedOption();
     }
     //(21) Assert method to compare results
-        public void assertMethod(By actual, String expected)
+    public void assertMethod(By actual, String expected)
         {
-            Assert.assertEquals(getText(actual),expected);
+            Assert.assertEquals(getTextReturn(actual),expected);
         }
 
     //(22) Scroll to view element
@@ -164,12 +176,12 @@ public class Utils extends BasePage             //BasePage is parent class
         driver.switchTo().alert().getText();
     }
     //(25) Get attribute of element//get attribute
-    public String getAttribute(By by, String text)
+    public String getAttributeElement(By by, String text)
     {
         return driver.findElement(by).getAttribute(text);
     }
     //(26) get css property of element //get css value
-    public void getCssValue(By by, String text)
+    public void getCssValueElement(By by, String text)
     {
         driver.findElement(by).getCssValue(text);
     }

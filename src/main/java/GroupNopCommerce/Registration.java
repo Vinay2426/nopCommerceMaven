@@ -181,8 +181,7 @@ public class Registration extends Utils             //Utils class is already a c
         Assert.assertTrue(price>=700 && price<=3000);
     }
     @Test
-    public void AddBooksToShoppingBasket()
-    {
+    public void AddBooksToShoppingBasket() throws InterruptedException {
         //click on register button
         clickOnElements(By.xpath("//a[@class='ico-register']"));
         //enter firstname, loadprops will obtain name from it.
@@ -210,10 +209,8 @@ public class Registration extends Utils             //Utils class is already a c
         clickOnElements(By.xpath("//ul[@class='top-menu notmobile']//a[@href='/books']"));
         //add first book to cart
         clickOnElements(By.xpath("//input[contains(@onclick, 'catalog/37/1')]"));
-        //click on Shopping cart
-        clickOnElements(By.xpath("//span[@class='cart-label']"));
-        //click on continue shopping
-        clickOnElements(By.xpath("//input[@class = 'button-2 continue-shopping-button']"));
+        //explicit wait till invisible of top bar in that specific webpage
+        explicitWaitTime(By.xpath("//p[@class = 'content']"),20);
         //add second book to cart
         clickOnElements(By.xpath("//input[contains(@onclick, '38/1')]"));
         //click on Shopping cart

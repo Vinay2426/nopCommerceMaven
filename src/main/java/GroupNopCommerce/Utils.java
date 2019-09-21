@@ -61,15 +61,12 @@ public class Utils extends BasePage             //BasePage is parent class
     {
         driver.manage().timeouts().implicitlyWait(time, SECONDS);
     }
-    //(9)Explicit wait
-    public void explicitWaitTime(long time, By by)
+    //(9)Explicit wait for invisible element
+    public void explicitWaitTime(By by, long time)
     {
         WebDriverWait wait = new WebDriverWait(driver,time);
-        WebElement waitForClick;
-        //waitForClick = (WebElement) wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(by));
-       // waitForClick.click();
-        wait.until(ExpectedConditions.elementToBeClickable(by)).click();
-
+        Boolean element = wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+        //element.click();
     }
     //(10) fluent wait
     public void fluentWait(long time, int frequency)
@@ -89,7 +86,7 @@ public class Utils extends BasePage             //BasePage is parent class
     //(11) Try to click element multiple times if not available in first go
     public void tryClickingMultipleTime(By by, int times)
     {
-        driver.findElements(by).get(times).click();
+        //driver.findElements(by).get(times).click();
     }
     //(12) is dropdown present
     public void dropDownPresent(By by, String text)
@@ -181,9 +178,9 @@ public class Utils extends BasePage             //BasePage is parent class
         return driver.findElement(by).getAttribute(text);
     }
     //(26) get css property of element //get css value
-    public void getCssValueElement(By by, String text)
+    public String getCssValueElement(By by, String text)
     {
-        driver.findElement(by).getCssValue(text);
+        return driver.findElement(by).getCssValue(text);
     }
     //(27) it will generate random numbers for email
     public static String randomDate()
@@ -246,9 +243,9 @@ public class Utils extends BasePage             //BasePage is parent class
         return driver.findElement(by).getText();
     }
     //(36) get the url
-    public void getUrl(String url)
+    public void getUrl(String key)
     {
         LoadProps loadProps = new LoadProps();
-        driver.get(loadProps.getProperty(url));
+        driver.get(loadProps.getProperty(key));
     }
 }

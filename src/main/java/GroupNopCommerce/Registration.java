@@ -210,7 +210,7 @@ public class Registration extends Utils             //Utils class is already a c
         //add first book to cart
         clickOnElements(By.xpath("//input[contains(@onclick, 'catalog/37/1')]"));
         //explicit wait till invisible of top bar in that specific webpage
-        explicitWaitTime(By.xpath("//p[@class = 'content']"),20);
+        explicitWaitUntilInvisibleElement(By.xpath("//p[@class = 'content']"),4);
         //add second book to cart
         clickOnElements(By.xpath("//input[contains(@onclick, '38/1')]"));
         //click on Shopping cart

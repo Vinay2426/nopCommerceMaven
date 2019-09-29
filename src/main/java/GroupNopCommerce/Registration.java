@@ -8,7 +8,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Date;
+import java.util.List;
+
 
 public class Registration extends Utils             //Utils class is already a child class of BasePage class
 {
@@ -32,7 +33,7 @@ public class Registration extends Utils             //Utils class is already a c
     @AfterMethod                //will execute at the end of every method
     public void closeBrowser()
     {
-        driver.quit();      //will quit the open browser
+            driver.quit();      //will quit the open browser
     }
     @Test
     public void registerAccount()
@@ -210,7 +211,7 @@ public class Registration extends Utils             //Utils class is already a c
         //add first book to cart
         clickOnElements(By.xpath("//input[contains(@onclick, 'catalog/37/1')]"));
         //explicit wait till invisible of top bar in that specific webpage
-        explicitWaitUntilInvisibleElement(By.xpath("//p[@class = 'content']"),4);
+        explicitWaitUntilInvisibleElement(By.xpath("//p[@class = 'content']"),10);
         //add second book to cart
         clickOnElements(By.xpath("//input[contains(@onclick, '38/1')]"));
         //click on Shopping cart

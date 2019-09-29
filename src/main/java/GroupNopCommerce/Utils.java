@@ -65,7 +65,12 @@ public class Utils extends BasePage             //BasePage is parent class
     public static void explicitWaitUntilInvisibleElement(By by, long time)
     {
         WebDriverWait wait = new WebDriverWait(driver,time);
-        Boolean element = wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+    }
+    public static void explicitWaitUntilElementClickable(long time, By by)
+    {
+        WebDriverWait wait = new WebDriverWait(driver,time);
+        wait.until(ExpectedConditions.elementToBeClickable(by));
     }
     //(10) fluent wait
     public static void fluentWait(long time, int frequency)

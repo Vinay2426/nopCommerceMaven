@@ -198,10 +198,10 @@ public class Utils extends BasePage             //BasePage is parent class
 
 
     //(29) take screenshot of browser
-    public static void takeScreenShot(WebDriver webdriver, String fileWithPath) throws IOException
+    public static void takeScreenShot(WebDriver driver, String fileWithPath) throws IOException
     {
         //convert web driver object to take screen shot
-        TakesScreenshot scrShot = ((TakesScreenshot)webdriver);
+        TakesScreenshot scrShot = ((TakesScreenshot)driver);
 
         //call get screen shot as method to create image file
         File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);

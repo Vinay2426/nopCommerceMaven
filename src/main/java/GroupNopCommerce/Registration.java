@@ -35,6 +35,7 @@ public class Registration extends Utils             //Utils class is already a c
     {
             driver.quit();      //will quit the open browser
     }
+
     @Test
     public void registerAccount()
     {

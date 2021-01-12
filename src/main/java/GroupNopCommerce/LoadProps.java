@@ -16,7 +16,7 @@ public class LoadProps                  //loadprops will get the info from testd
         props = new Properties();
         try
         {
-            inputStream = new FileInputStream("src\\main\\Resources\\testdataConfig.properties");
+            inputStream = new FileInputStream("src\\main\\Resources\\testDataConfig.properties");
         }
         catch (FileNotFoundException e)
         {
